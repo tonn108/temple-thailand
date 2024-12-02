@@ -1,0 +1,5 @@
+.show-image img {
+    width: 1040px;
+    height: 750px;
+    object-fit: cover;
+}

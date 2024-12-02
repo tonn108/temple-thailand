@@ -1,0 +1,15 @@
+.card-search {
+    display: flex;
+    width: 600px;
+    height: 300px;
+}
+
+.card-search img {
+    max-width: 300px;
+    height: 300px;
+}
+
+.card-search-body {
+    flex: 1;
+    padding: 10px;
+}

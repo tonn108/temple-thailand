@@ -29,13 +29,12 @@ class LoginController extends Controller
 
             Auth::login($user);
 
-            return redirect()->route('index')
-                ->with('success', 'ลงทะเบียนสำเร็จ! ยินดีต้อนรับเข้าสู่ระบบ');
+            session()->flash('success', 'เข้าสู่ระบบสำเร็จ');
+            return redirect()->route('index');
 
         } catch (\Exception $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', 'เกิดข้อผิดพลาดในการลงทะเบียน กรุณาลองใหม่อีกครั้ง');
+            session()->flash('error', 'เกิดข้อผิดพลาดในการลงทะเบียน กรุณาลองใหม่อีกครั้ง');
+            return redirect()->back();
         }
     }
 
@@ -58,8 +57,8 @@ class LoginController extends Controller
                 }
 
                 // ส่งกลับไปยังหน้าที่ต้องการ หรือหน้าหลัก
-                return redirect()->intended(route('index'))
-                    ->with('success', 'เข้าสู่ระบบสำเร็จ');
+                session()->flash('success', 'เข้าสู่ระบบสำเร็จ');
+                return redirect()->intended(route('index'));
             }
 
             // เพิ่มการนับจำนวนครั้งที่ล็อกอินผิดพลาด
@@ -68,19 +67,16 @@ class LoginController extends Controller
 
             // ถ้าล็อกอินผิดพลาดเกิน 5 ครั้ง
             if ($attempts >= 5) {
-                return back()
-                    ->with('error', 'คุณได้พยายามเข้าสู่ระบบหลายครั้งเกินไป กรุณารอสักครู่แล้วลองใหม่อีกครั้ง')
-                    ->withInput($request->except('password'));
+                session()->flash('error', 'คุณได้พยายามเข้าสู่ระบบหลายครั้งเกินไป กรุณารอสักครู่แล้วลองใหม่อีกครั้ง');
+                return redirect()->back();
             }
 
-            return back()
-                ->with('error', 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง')
-                ->withInput($request->except('password'));
+            session()->flash('error', 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ กรุณาลองใหม่อีกครั้ง');
+            return redirect()->back();
 
         } catch (\Exception $e) {
-            return back()
-                ->with('error', 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ กรุณาลองใหม่อีกครั้ง')
-                ->withInput($request->except('password'));
+            session()->flash('error', 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ กรุณาลองใหม่อีกครั้ง');
+            return redirect()->back();
         }
     }
 }

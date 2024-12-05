@@ -18,7 +18,8 @@ class LogOutController extends Controller
         $request->session()->regenerateToken();
     
         // ส่งกลับไปยังหน้าหลักพร้อมข้อความ
-        return redirect()->route('temple.index')
-            ->with('success', 'ออกจากระบบสำเร็จ');
+        session()->flash('success', 'ออกจากระบบสำเร็จ');
+        return redirect()->route('temple.index');
+            
     }
 }

@@ -7,30 +7,39 @@ use Illuminate\Http\Request;
 
 class TempleController extends Controller {
     public function index() {
+        
+        return view('welcome');
+    }
+
+    public function mainContent(){
         $temples = Temple::all();
-        return view('welcome', compact('temples'));
+        return view('index', compact('temples'));
     }
     
     public function search(Request $request) {
         $search = $request->search; 
-            // ถ้าไม่มีคำค้นหา ให้แสดงข้อมูลทั้งหมด
-    if (empty($search)) {
-        $temples = Temple::all();
-        return view('searchview', compact('temples', 'search'));
-    }
-        // เมือมีคำค้นหา จะค้นหาข้อมูล
+        
+        // เคลียร์ session ทั้งหมดที่เกี่ยวข้องก่อน
+        session()->forget(['error', 'success']);
+        
+        if (empty($search) || trim($search) === '') {
+            $temples = Temple::all();
+            session()->flash('success', 'แสดงข้อมูลทั้งหมด');
+            return view('searchview', compact('temples', 'search'));
+        }
+
         $temples = Temple::where('temple_name', 'LIKE', "%{$search}%")
                         ->orWhere('location', 'LIKE', "%{$search}%")
                         ->orWhere('description', 'LIKE', "%{$search}%")
                         ->orWhere('sector', 'LIKE', "%{$search}%")
                         ->get();
 
-        // ถ้าไม่มีข้อมูลที่ค้นหา แสดงข้อความแจ้งเตือน
         if ($temples->isEmpty()) {
-            return redirect()->back()->with('error', 'ไม่พบข้อมูลที่ค้นหา');
+            session()->flash('error', 'ไม่พบข้อมูลที่ค้นหา');
+            return view('searchview', compact('temples', 'search'));
         }
         
-        // ส่งผลลัพธ์ไปยัง view
+        session()->flash('success', 'ค้นหาข้อมูลสำเร็จ');
         return view('searchview', compact('temples', 'search'));
     }
 
@@ -63,14 +72,13 @@ class TempleController extends Controller {
                 'image' => 'img/' . $imageName,
                 'sector' => $request->sector
             ]);
-            return redirect()->route('index')
-                ->with('success', 'เพิ่มข้อมูลวัดเรียบร้อยแล้ว');
+            session()->flash('success', 'เพิ่มข้อมูลวัดเรียบร้อยแล้ว');
+            return redirect()->route('index');
 
         } catch (\Exception $e) {
             dd($e);
-            return redirect()->back()
-                ->with('error', 'เกิดข้อผิดพลาด: ' . $e->getMessage())
-                ->withInput();
+            session()->flash('error', 'เกิดข้อผิดพลาด: ' . $e->getMessage());
+            return redirect()->back();
         }
     }
 
@@ -104,13 +112,14 @@ class TempleController extends Controller {
         }
 
         $temple->update($data);
-
-        return redirect()->route('index')->with('success', 'อัพเดทข้อมูลสำเร็จ');
+        session()->flash('success', 'อัพเดทข้อมูลสำเร็จ');
+        return redirect()->route('index');
     }
 
     public function destroy($id) {
         $temple = Temple::find($id);
         $temple->delete();
+        session()->flash('success', 'ลบข้อมูลสำเร็จ');
         return redirect()->route('index');
     }
 

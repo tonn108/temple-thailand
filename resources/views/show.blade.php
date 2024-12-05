@@ -23,7 +23,7 @@
                     @endfor
                     ({{ $temple->popular }}/5)
                 </p>
-                
+                @if (Auth::check() && Auth::user()->role == 'manager' || Auth::user()->role == 'admin')
                 <div class="mt-3">
                     <button class="btn btn-warning" onclick="window.location.href='{{ route('temples.edit', $temple->id) }}'">แก้ไขข้อมูล</button> 
                     <form action="{{ route('temples.destroy', $temple->id) }}" method="POST" style="display: inline;">
@@ -32,6 +32,7 @@
                         <button type="submit" class="btn btn-danger" onclick="return confirm('คุณแน่ใจหรือไม่ที่จะลบข้อมูลนี้?')">ลบข้อมูล</button>
                     </form>
                 </div>
+                @endif
             @else
                 <p>ไม่พบข้อมูลวัดที่ต้องการ</p>
             @endif

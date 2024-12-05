@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TempleController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogOutController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +31,13 @@ Route::put('/temples/{id}', [TempleController::class, 'update'])->name('temples.
 Route::get('/temples/create', [TempleController::class, 'create'])->name('temples.create');
 Route::get('/temples/{id}', [TempleController::class, 'show'])->name('temples.show');
 
+Route::get('/login', function () {
+    return view('login.loginPage');
+})->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/register', [LoginController::class, 'register'])->name('login.register');
 
+Route::post('/logout', [LogOutController::class, 'logout'])->name('logout');
 
 
 

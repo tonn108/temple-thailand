@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-5">
                 <div class="search">
                     <form action="{{ route('search') }}" method="get">
                         @csrf
@@ -36,9 +36,17 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-3">
                 <div class="user">
-                    <img src="{{ asset('img/wat7.jpg') }}" class="rounded-circle" alt="logo" style="width: 30px; height: 30px; border-radius: 10px;">
+                    @if (Auth::check())
+                    <form action="{{ route('logout') }}" method="post"> 
+                        @csrf
+                        <button class="btn btn-primary" type="submit">logout</button>
+                        <label>{{ Auth::user()->username }}</label>
+                        <img src="{{ asset('img/wat7.jpg') }}" class="rounded-circle" alt="logo" style="width: 30px; height: 30px; border-radius: 10px;">
+                    </form>
+                    @else
+                    @endif
                 </div>
             </div>
         </div>

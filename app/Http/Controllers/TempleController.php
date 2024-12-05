@@ -35,6 +35,7 @@ class TempleController extends Controller {
     }
 
     public function store(Request $request) {
+        
         $request->validate([
             'temple_name' => 'required',
             'location' => 'required',
@@ -45,27 +46,28 @@ class TempleController extends Controller {
         ]);
 
         try {
-            if ($request->hasFile('image')) {
-                $imageName = time() . '.' . $request->image->extension();
-                
-                // บันทึกไฟล์
-                $request->image->move(public_path('img'), $imageName);
-
-                // สร้างข้อมูล
-                Temple::create([
-                    'temple_name' => $request->temple_name,
-                    'location' => $request->location,
-                    'description' => $request->description,
-                    'popular' => $request->popular,
-                    'image' => 'img/' . $imageName,
-                    'sector' => $request->sector
-                ]);
-
-                return redirect()->route('index')
-                    ->with('success', 'เพิ่มข้อมูลวัดเรียบร้อยแล้ว');
+            if (!$request->hasFile('image')) {
+                return redirect()->back()
+                    ->with('error', 'กรุณาอัพโหลดรูปภาพ')
+                    ->withInput();
             }
+
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('img'), $imageName);
+
+            Temple::create([
+                'temple_name' => $request->temple_name,
+                'location' => $request->location,
+                'description' => $request->description,
+                'popular' => $request->popular,
+                'image' => 'img/' . $imageName,
+                'sector' => $request->sector
+            ]);
+            return redirect()->route('index')
+                ->with('success', 'เพิ่มข้อมูลวัดเรียบร้อยแล้ว');
+
         } catch (\Exception $e) {
-            // จัดการกรณีเกิด error
+            dd($e);
             return redirect()->back()
                 ->with('error', 'เกิดข้อผิดพลาด: ' . $e->getMessage())
                 ->withInput();

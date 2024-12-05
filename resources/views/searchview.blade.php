@@ -1,7 +1,8 @@
 @extends('layout.app')
 @section('title', 'ค้นหาวัด')
 @section('content')
-    <h1>ผลลคพธ์การค้นหาวัด</h1>
+    <div class="container">
+    <h1>ผลลัพธ์การค้นหาข้อมูลวัด</h1>
     @if(isset($temples) && $temples->isEmpty())
         <p>ไม่พบข้อมูลวัดที่ต้องการ</p>
     @else
@@ -18,4 +19,5 @@
             </div>
         @endforeach
     @endif
+    </div>
 @endsection

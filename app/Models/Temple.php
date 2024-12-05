@@ -14,11 +14,4 @@ class Temple extends Model
         'image',
         'sector'
     ];
-
-    protected $casts = [
-        'latitude' => 'float',
-        'longitude' => 'float',
-        'status' => 'boolean'
-    ];
-
 }

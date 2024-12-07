@@ -1,0 +1,344 @@
+/* นำเข้า Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --body-color: #E4E9F7;
+    --sidebar-color: #FFF;
+    --primary-color: #1976d2;  /* ปรับสีให้เข้ากับธีมเว็บ */
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+    
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
+}
+
+#Sidebar {
+    grid-area: s;
+    width: 240px;
+    height: 100vh;
+    background: linear-gradient(180deg, #e3f2fd, #bbdefb);
+    color: white;
+    position: fixed;
+    box-shadow: 3px 0 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+}
+
+#Sidebar.collapsed {
+    width: 100px;
+    transform: translateX(0);
+}
+
+/* Header */
+.sidebar-header {
+   padding: 20px 0 0 0;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-header h3 {
+    font-size: 24px;
+    color: #0d47a1;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Menu */
+
+
+.sidebar-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.sidebar-menu li {
+    margin: 12px 0;
+}
+
+.sidebar-menu a {
+    display: block;
+    padding: 14px 25px;
+    color: #1565c0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+body.dark .sidebar-menu a {
+    color: white;
+}
+
+.sidebar-menu a:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: #f1c40f;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.sidebar-menu a:hover {
+    background: rgba(255,255,255,0.1);
+    padding-left: 30px;
+}
+
+.sidebar-menu a:hover:before {
+    transform: scaleY(1);
+}
+
+/* Active state */
+.sidebar-menu a.active {
+    background: rgba(255,255,255,0.2);
+    padding-left: 30px;
+}
+
+.sidebar-menu a.active:before {
+    transform: scaleY(1);
+}
+
+/* Footer */
+.sidebar-footer {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+}
+
+.sidebar-footer a {
+    color: #1565c0;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+}
+
+.sidebar-footer a:hover {
+    background: #e74c3c;
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+}
+body.dark .sidebar-footer a {
+    color: white;
+}
+
+/* Hover Effects */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.sidebar-header h3:hover {
+    animation: pulse 1s infinite;
+    cursor: pointer;
+}
+
+/* สไตล์สำหรับปุ่มเปิด/ปิด */
+.sidebar-toggle {
+    background: transparent;
+   border: none;
+    padding: 10px;
+    cursor: pointer;
+    color: #333; /* หรือสีที่ต้องการ */
+    position: static; /* ยกเลิก fixed position */
+    left: auto;
+    transition: color 0.3s ease; /* transition เฉพาะสีเท่านั้น */
+}
+
+.sidebar-toggle:hover {
+    color: #1976d2; /* สีตอน hover */
+}
+
+/* สไตล์สำหรับ Dark Mode Toggle */
+.mode {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 25px;
+    cursor: pointer;
+    transition: var(--tran-03);
+}
+
+.sun-moon {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.sun-moon i {
+    position: absolute;
+    left: 0;
+    font-size: 24px;
+    color: #1565c0;
+    transition: all 0.3s ease;
+}
+
+.sun-moon i.sun {
+    opacity: 1;
+}
+
+.sun-moon i.moon {
+    opacity: 0;
+}
+
+body.dark .sun-moon i.sun {
+    opacity: 0;
+}
+
+body.dark .sun-moon i.moon {
+    opacity: 1;
+}
+
+.mode-text {
+    font-size: 1.1rem;
+    color: #1565c0;
+    margin-left: 15px;
+    flex-grow: 1;
+}
+
+.toggle-switch {
+    position: relative;
+    height: 22px;
+    width: 44px;
+    border-radius: 25px;
+    background-color: #ddd;
+}
+
+.toggle-switch .switch {
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #fff;
+    top: 2px;
+    left: 2px;
+    transform: translateX(0);
+    transition: var(--tran-03);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* เมื่ออยู่ในโหมดกลางคืน */
+body.dark .toggle-switch .switch {
+    transform: translateX(22px);
+    background: #1976d2;
+}
+
+body.dark .toggle-switch {
+    background: #1565c0;
+}
+
+/* Hover Effects */
+.mode:hover {
+    background: rgba(21, 101, 192, 0.1);
+}
+
+.toggle-switch:hover .switch {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark Mode สำหรับข้อความและไอคอน */
+body.dark .mode-text {
+    color: #fff;
+}
+
+body.dark .sun-moon i {
+    color: #fff;
+}
+
+/* สไตล์สำหรับหมดกลางคืน */
+body.dark {
+    --body-color: #121212;  
+    --sidebar-color: #1E1E1E;  
+    --primary-color: #2D2D2D;  
+    --primary-color-light: #2D2D2D;
+    --toggle-color: #FFF;
+    --text-color: #CCC;
+}
+
+body.dark #Sidebar {
+    background: linear-gradient(180deg, #1E1E1E, #121212);  /* ปรับสีให้เข้มขึ้น */
+}
+
+/* ปรับสไตล์เมื่อ Sidebar ถูกย่อ */
+#Sidebar.collapsed .sidebar-header h3 {
+    display: none;  /* ซ่อนหัวข้อ */
+}
+
+#Sidebar.collapsed .sidebar-menu a {
+    padding: 14px;  /* ลด padding */
+    justify-content: center;  /* จัดไอคอนให้อยู่กลาง */
+}
+
+#Sidebar.collapsed .sidebar-menu span,
+#Sidebar.collapsed .mode-text {
+    display: none;  /* ซ่อนข้อความ */
+}
+
+#Sidebar.collapsed .sidebar-menu i {
+    margin: 0;  /* ลบ margin ของไอคอน */
+}
+
+#Sidebar.collapsed .sidebar-footer {
+    width: 40%;
+    padding: 10px 0;  /* ปรับ padding */
+    text-align: center;  /* จัดให้อยู่กึ่งกลาง */
+}
+
+#Sidebar.collapsed .sidebar-footer a {
+    padding: 8px;  /* ลด padding ของปุ่ม */
+    display: flex;
+    justify-content: center;  /* จัดไอคอนให้อยู่กึ่งกลาง */
+    align-items: center;
+}
+
+#Sidebar.collapsed .sidebar-footer a span,
+#Sidebar.collapsed .sidebar-footer a i:not(:first-child) {
+    display: none;  /* ซ่อนข้อความและไอคอนที่ไม่ใช่ไอคอนแรก */
+}
+
+#Sidebar.collapsed .sidebar-footer a i {
+    margin: 0;  /* ลบ margin ของไอคอน */
+    font-size: 1.2rem;  /* ปรับขนาดไอคอน */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #Sidebar {
+        width: 60px;
+        overflow: hidden;
+        transition: width 0.3s ease;
+    }
+
+    #Sidebar:hover {
+        width: 240px;
+    }
+
+    .sidebar-header h3 {
+        font-size: 0;
+    }
+
+    #Sidebar:hover .sidebar-header h3 {
+        font-size: 24px;
+    }
+
+    .sidebar-menu a {
+        padding: 12px 15px;
+    }
+}

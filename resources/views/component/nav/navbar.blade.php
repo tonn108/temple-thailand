@@ -1,40 +1,28 @@
-<nav class="bg-white shadow">
+<nav class="bg-white shadow" id="Nav">
     <div class="container" id="navbar" style="padding:0; max-width:100%">
         <div class="row">
             <div class="col-md-1">
+                <div class="ham">
+                    <button class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-1">
                 <div class="logo">
-                    <img src="{{ asset('img/wat7.jpg') }}" class="rounded-circle" alt="logo" style="width: 55px; height: 55px; border-radius: 10px;">
+                    <img src="{{ asset('img/wat7.jpg') }}" class="rounded-circle" alt="logo" style="width: 40px; height: 40px; border-radius: 10px;">
                 </div>    
             </div>
-            <div class="col-md-4">
+            <div class="col-md-1">
                 <div class="menu">
                     <div class="home">
                         <div class="home-btn">
-                            <a class="btn-home  btn-sm" aria-current="page" href="{{ route('index') }}">หน้าแรก</a>
+                            <a class="btn-home  btn-sm" aria-current="page" href="{{ route('index') }}"><i class="fa-solid fa-house"></i></a>
                         </div>
                     </div>
-                    <div class="about">
-                        <div class="about-btn">
-                            <a class="btn-about  btn-sm" aria-current="page" href="{{ route('temples.alltemples') }}">วัดทั้งหมด</a>
-                        </div>
-                    </div>
-                    @if (Auth::check() && Auth::user()->role == 'manager' || Auth::user()->role == 'admin')
-                    <div class="insert">
-                        <div class="insert-btn">
-                            <a class="btn-insert  btn-sm" aria-current="page" href="{{ route('temples.create') }}">เพิ่มข้อมูลวัด</a>
-                        </div>
-                    </div>
-                    @endif
-                    @if (Auth::check() && Auth::user()->role == 'manager')
-                    <div class="manage">
-                        <div class="manage-btn">
-                            <a class="btn-manage  btn-sm" aria-current="page" href="{{ route('user.detail') }}">จัดการยูสเซอร์</a>
-                        </div>
-                    </div>
-                    @endif
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-7">
                 <div class="search">
                     <form action="{{ route('search') }}" method="get">
                         @csrf
@@ -45,17 +33,22 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2" >
                 <div class="user">
+                    <div class="name">
+                        <label>{{ Auth::user()->username }}</label>
+                    </div>
+                    <div class="img">
+                        <img src="{{ asset('img/wat7.jpg') }}" class="rounded-circle" alt="logo" style="width: 30px; height: 30px; border-radius: 10px;">
+                    </div>
+                    <div class="logout">
                     @if (Auth::check())
                     <form action="{{ route('logout') }}" method="post"> 
                         @csrf
                         <button class="btn btn-primary" type="submit">logout</button>
-                        <label>{{ Auth::user()->username }}</label>
-                        <img src="{{ asset('img/wat7.jpg') }}" class="rounded-circle" alt="logo" style="width: 30px; height: 30px; border-radius: 10px;">
                     </form>
-                    @else
                     @endif
+                    </div>
                 </div>
             </div>
         </div>

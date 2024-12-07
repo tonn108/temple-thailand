@@ -1,7 +1,13 @@
+@section('css')
+<link href="{{ asset('css/edit.css') }}" rel="stylesheet">
+@endsection
 @extends('layout.app')
 @section('title', 'แก้ไขข้อมูลวัด')
+@section('sidebar')
+    @include('component.sidebar.sidebar')
+@endsection
 @section('content')
-    <div class="container">
+    <div class="container" style="margin-top: 56px;">
         <h1>แก้ไขข้อมูลวัด</h1>
         <form action="{{ route('temples.update', $temple->id) }}" method="POST" enctype="multipart/form-data">
             @csrf

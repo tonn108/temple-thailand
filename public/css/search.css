@@ -1,22 +1,33 @@
 .card-search {
     display: flex;
+    flex-direction: row;
+    align-items: stretch;
     width: 1200px;
     height: 300px;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .card-search img {
-    max-width: 300px;
+    width: 300px;
     height: 300px;
+    object-fit: cover;
     border-radius: 10px 0 0 10px;
 }
 
 .card-search-body {
     flex: 1;
-    padding: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.card-search-body a{
+    width: 90px;
 }
 
 .toast-container {
+    margin-top: 50px;
     z-index: 9999;
 }

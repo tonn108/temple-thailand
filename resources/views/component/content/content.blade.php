@@ -1,4 +1,4 @@
-<div class="content" id="content">
+<main class="content" id="content">
     <div class="row">
         <div class="cover">
             <h1>ยินดีต้อนรับเข้าสู่เว็บไซต์ของเรา</h1>
@@ -119,4 +119,4 @@
         </div>
     </div>
     
-</div>
+</main>

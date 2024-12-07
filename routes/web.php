@@ -5,6 +5,7 @@ use App\Http\Controllers\TempleController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogOutController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,8 @@ Route::put('/temples/{id}', [TempleController::class, 'update'])->name('temples.
 Route::get('/temples/create', [TempleController::class, 'create'])->name('temples.create');
 Route::get('/temples/{id}', [TempleController::class, 'show'])->name('temples.show');
 
+Route::get('/report/report_day', [ReportController::class, 'report_day'])->name('report.report_day');
+Route::get('/report/report_month', [ReportController::class, 'report_month'])->name('report.report_month');
 
 Route::post('/logout', [LogOutController::class, 'logout'])->name('logout');
 

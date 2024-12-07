@@ -1,5 +1,11 @@
+@section('css')
+<link href="{{ asset('css/Show.css') }}" rel="stylesheet">
+@endsection
 @extends('layout.app')
 @section('title', 'ข้อมูลวัด')
+@section('sidebar')
+    @include('component.sidebar.sidebar')
+@endsection
 @section('content')
 <div class="container">
     <h1>รายละเอียดวัด</h1>

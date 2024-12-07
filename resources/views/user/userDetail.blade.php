@@ -1,7 +1,12 @@
 @extends('layout.app')
+@section('title', 'จัดการยูสเซอร์')
+@section('sidebar')
+    @include('component.sidebar.sidebar')
+@endsection
 @section('content')
+
 @if(session('error'))
-<div class="toast-container position-fixed top-0 end-0 p-3">
+<div class="toast-container position-fixed top-0 end-0 p-3" style="margin-top: 50px; z-index: 9999;" >
     <div id="error-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-danger text-white">
             <strong class="me-auto">แจ้งเตือน</strong>
@@ -14,7 +19,7 @@
 </div>
 @endif
 @if(session('success'))
-<div class="toast-container position-fixed top-0 end-0 p-3">
+<div class="toast-container position-fixed top-0 end-0 p-3" style="margin-top: 50px; z-index: 9999;">
     <div id="success-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header bg-success text-white">
             <strong class="me-auto">แจ้งเตือน</strong>
@@ -46,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-<div class="container">
+<div class="container" style="margin-top: 20px; margin-left: 20px;">
     <div class="row">
         <div class="col-md-6">
             <h1>จัดการยูสเซอร์</h1>

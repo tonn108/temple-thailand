@@ -132,10 +132,10 @@ class TempleController extends Controller {
     }
 
     public function alltemples() {
-        $northTemples = Temple::where('sector', 'ภาคเหนือ')->get();
-        $eastTemples = Temple::where('sector', 'ภาคตะวันออก')->get();
-        $centralTemples = Temple::where('sector', 'ภาคกลาง')->get();
-        $southTemples = Temple::where('sector', 'ภาคใต้')->get();
+        $northTemples = Temple::where('sector', 'วัดภาคเหนือ')->get();
+        $eastTemples = Temple::where('sector', 'วัดภาคตะวันออก')->get();
+        $centralTemples = Temple::where('sector', 'วัดภาคกลาง')->get();
+        $southTemples = Temple::where('sector', 'วัดภาคใต้')->get();
 
         return view('alltemples', compact('northTemples', 'eastTemples', 'centralTemples', 'southTemples'));
     }

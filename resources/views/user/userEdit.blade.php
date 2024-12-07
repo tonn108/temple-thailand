@@ -1,6 +1,14 @@
+@section('css')
+<link href="{{ asset('css/userEdit.css') }}" rel="stylesheet">
+@endsection
+
 @extends('layout.app')
+@section('title', 'แก้ไขยูสเซอร์')
+@section('sidebar')
+    @include('component.sidebar.sidebar')
+@endsection
 @section('content')
-    <div class="container">
+    <div class="container" style="margin-top: 50px;">
         <h1>แก้ไขยูสเซอร์</h1>
         <div class="row">
             <div class="col-md-6">

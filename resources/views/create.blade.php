@@ -1,7 +1,13 @@
+@section('css')
+<link href="{{ asset('css/create.css') }}" rel="stylesheet">
+@endsection
 @extends('layout.app')
 @section('title', 'เพิ่มข้อมูลวัดใหม่')
+@section('sidebar')
+    @include('component.sidebar.sidebar')
+@endsection
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 20px; margin-left: 20px;">
     <h1>Insert</h1>
     <div class="row">
         <div class="col-md-6">
@@ -35,10 +41,10 @@
                 <div class="form-group">
                     <label for="name">ภูมิภาค</label>
                     <select name="sector" class="form-control">
-                        <option value="ภาคเหนือ">ภาคเหนือ</option>
-                        <option value="ภาคตะวันออก">ภาคตะวันออก</option>
-                        <option value="ภาคกลาง">ภาคกลาง</option>
-                        <option value="ภาคใต้">ภาคใต้</option>
+                        <option value="วัดภาคเหนือ">วัดภาคเหนือ</option>
+                        <option value="วัดภาคตะวันออก">วัดภาคตะวันออก</option>
+                        <option value="วัดภาคกลาง">วัดภาคกลาง</option>
+                        <option value="วัดภาคใต้">วัดภาคใต้</option>
                     </select>
                 </div>
                 <div class="form-group">

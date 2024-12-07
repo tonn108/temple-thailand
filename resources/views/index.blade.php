@@ -1,7 +1,15 @@
 @extends('layout.app')
+@section('css')
+<link href="{{ asset('css/content.css') }}" rel="stylesheet">
+@endsection
+@section('title', 'หน้าแรก')
+@section('sidebar')
+    @include('component.sidebar.sidebar')
+@endsection
 @section('content')
+<main id="Content">
     @if(session('success'))
-        <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div class="toast-container position-fixed top-0 end-0 p-3" style="margin-top: 50px; z-index: 9999;">
             <div id="success-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header bg-success text-white">
                     <strong class="me-auto">แจ้งเตือน</strong>
@@ -24,11 +32,6 @@
         </script>
     @endif
     @include('component.content.content')
+</main>
 @endsection
-
-<style>
-    .toast-container {
-        z-index: 9999;
-    }
-</style>
 

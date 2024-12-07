@@ -1,5 +1,11 @@
+@section('css')
+<link href="{{ asset('css/alltemples.css') }}" rel="stylesheet">
+@endsection
 @extends('layout.app')
 @section('title', 'ข้อมูลวัดทั้งหมด')
+@section('sidebar')
+    @include('component.sidebar.sidebar')
+@endsection
 @section('content')
     
     

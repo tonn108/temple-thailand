@@ -37,13 +37,13 @@ class ReportController extends Controller
                         ->whereMonth('created_at', substr($date, 5, 2))
                         ->get();
 
-        $totalTemples = Temple::count();
-        $northTemples = Temple::where('sector', 'วัดภาคเหนือ')->count();
-        $centralTemples = Temple::where('sector', 'วัดภาคกลาง')->count();
-        $eastTemples = Temple::where('sector', 'วัดภาคตะวันออก')->count();
-        $southTemples = Temple::where('sector', 'วัดภาคใต้')->count();
+        $totalTemples = $temples->count();
+        $northTemples = $temples->where('sector', 'วัดภาคเหนือ')->count();
+        $centralTemples = $temples->where('sector', 'วัดภาคกลาง')->count();
+        $eastTemples = $temples->where('sector', 'วัดภาคตะวันออก')->count();
+        $southTemples = $temples->where('sector', 'วัดภาคใต้')->count();
 
-        $allTemples = $temples->count();
+        $allTemples = Temple::count();
         return view('report.report_month', compact('totalTemples', 'northTemples', 'centralTemples', 'eastTemples', 'southTemples', 'allTemples', 'date'));
     }
 }

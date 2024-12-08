@@ -6,11 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const darkModeToggle = document.querySelector('.mode');
     const modeText = document.querySelector('.mode-text');
 
-    // ตั้งค่าเริ่มต้นเป็นโหมดกลางวัน
-    if(body.classList.contains('dark')) {
+    // ตั้งค่าเริ่มต้นและโหลดสถานะ Dark Mode
+    const darkModeState = localStorage.getItem('darkMode');
+    if(darkModeState === 'dark') {
+        body.classList.add('dark');
+        modeText.innerText = 'โหมดกลางคืน';
+    } else {
         body.classList.remove('dark');
+        modeText.innerText = 'โหมดกลางวัน';
     }
-    modeText.innerText = 'โหมดกลางวัน';
 
     // Sidebar Toggle
     sidebarToggle.addEventListener('click', function() {
@@ -35,8 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if(body.classList.contains('dark')) {
             modeText.innerText = 'โหมดกลางคืน';
+            localStorage.setItem('darkMode', 'dark');
         } else {
             modeText.innerText = 'โหมดกลางวัน';
+            localStorage.setItem('darkMode', 'light');
         }
     });
 

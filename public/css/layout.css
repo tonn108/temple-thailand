@@ -49,9 +49,13 @@ img{
     overflow-y: scroll;
     height: 100%;
     padding:0 5px;
-    transition: all 0.3s ease;
+    width: calc(100vw - 240px);
+    transition: width 0.3s ease;
+    position: fixed;
+    right: 0;
+    margin-top: 56px;
     background-color: #FFF;
-    margin-left: 0;
+    
     
     /* ซ่อน scrollbar สำหรับ Chrome, Safari, และ Opera */
     &::-webkit-scrollbar {
@@ -89,7 +93,7 @@ body.dark #Nav {
 }
 
 body.dark #Content {
-    background-color: #121212;
+    background-color: #1E1E1E;
     color: #CCC;
 }
 
